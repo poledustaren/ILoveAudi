@@ -10,5 +10,6 @@ namespace ILoveAudi.Services
     {
         Task<List<Car>> SaveCarToDb();
         List<Car> Cars();
+        void RemoveCar(int id);
     }
 }

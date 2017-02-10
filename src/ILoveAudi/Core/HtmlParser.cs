@@ -33,12 +33,16 @@ namespace ILoveAudi.Core
 
         public List<Car> Cars()
         {
-            //я не смог понять почему запрос с помощью ef из базы не даёт результата увы
-            var cars = _db.Cars.Where(x=>x.Name=="AudiA6");
-            var carsss = cars.ToList();
-            return new List<Car>();
+            var cars = _db.Cars.ToList();
+            return cars;
         }
 
+        public void RemoveCar(int id)
+        {
+            var car=_db.Cars.FirstOrDefault(x => x.Id == id);
+            _db.Cars.Remove(car);
+            _db.SaveChanges();
+        }
         
         public async Task<List<Car>> GetAllCarsFromShop()
         {
@@ -133,7 +137,7 @@ namespace ILoveAudi.Core
                     .Replace("&nbsp;", "")
                     .Replace("P", ""));
 
-            return new Car(name, year, price);
+            return new Car {Name=name,Price=price,Year=year};
         }
         private string TextFromNode(HtmlNode node, string tagName, string className)
         {

@@ -14,6 +14,7 @@
     </thead>
     <tfoot>
     <tr>
+        <th>Delete item </th>
         <th>Имя</th>
         <th>Цена</th>
         <th>Год</th>
@@ -23,11 +24,12 @@
         
             @foreach (var car in Model)
             {
-            <tr>
-                <td>@car.Name</td>
-                <td>@car.Price</td>
-                <td>@car.Year</td>
-            </tr>
+                <tr>
+                    <td><a asp-controller="Home" asp-action="RemoveCar" asp-route-id="@car.Id">Delete</a></td>
+                    <td>@car.Name</td>
+                    <td>@car.Price</td>
+                    <td>@car.Year</td>
+                </tr>
             }
    
     </tbody>

@@ -11,8 +11,8 @@ namespace ILoveAudi.Controllers
 {
     public class HomeController : Controller
     {
-        private IHtmlParser _parser;
-
+        IHtmlParser _parser;
+        
         public HomeController(IHtmlParser parser)
         {
             _parser = parser;
@@ -20,8 +20,19 @@ namespace ILoveAudi.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = await _parser.SaveCarToDb();
-            return View(result);
+            var cars = _parser.Cars();
+            if (!cars.Any())
+            {
+                cars = await _parser.SaveCarToDb();
+            }
+           
+            return View(cars);
+        }
+        public  IActionResult RemoveCar(int id)
+        {
+            _parser.RemoveCar(id);
+
+            return RedirectToAction("Index");
         }
 
     }
