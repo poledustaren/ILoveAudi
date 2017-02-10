@@ -1,0 +1,45 @@
+﻿@using ILoveAudi.Models
+@model List<Car>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table id="audi" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Цена</th>
+        <th>Год</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>Имя</th>
+        <th>Цена</th>
+        <th>Год</th>
+    </tr>
+    </tfoot>
+    <tbody>
+        
+            @foreach (var car in Model)
+            {
+            <tr>
+                <td>@car.Name</td>
+                <td>@car.Price</td>
+                <td>@car.Year</td>
+            </tr>
+            }
+   
+    </tbody>
+</table>
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        $("#audi").DataTable();
+    });
+</script>
+
+}
+
+
+
