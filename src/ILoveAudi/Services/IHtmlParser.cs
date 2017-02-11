@@ -8,8 +8,7 @@ namespace ILoveAudi.Services
 {
     public interface IHtmlParser
     {
-        Task<List<Car>> SaveCarToDb();
-        List<Car> Cars();
+        Task<List<Car>> Cars();
         void RemoveCar(int id);
     }
 }

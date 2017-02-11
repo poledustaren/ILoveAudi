@@ -27,13 +27,17 @@ namespace ILoveAudi.Core
             var cars = await GetAllCarsFromShop();
             await _db.Cars.AddRangeAsync(cars);
             await _db.SaveChangesAsync();
-            return cars;
+            return await _db.Cars.ToListAsync();
 
         }
 
-        public List<Car> Cars()
+        public async Task<List<Car>> Cars()
         {
-            var cars = _db.Cars.ToList();
+            var cars = await _db.Cars.ToListAsync();
+            if (!cars.Any())
+            {
+                cars = await SaveCarToDb();
+            }
             return cars;
         }
 
